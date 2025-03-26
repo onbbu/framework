@@ -11,12 +11,6 @@ RUN echo "source /usr/share/bash-completion/completions/git" >> /home/vscode/.ba
 
 WORKDIR /workspaces
 
-RUN curl -s https://api.github.com/repos/njavilas2015/githooks/releases/latest | \
-    grep "browser_download_url" | \
-    cut -d '"' -f 4 | \
-    xargs wget && \
-    chmod +x githooks
-
 COPY requirements.txt /tmp/requirements.txt
 
 
