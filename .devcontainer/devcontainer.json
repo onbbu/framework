@@ -13,7 +13,7 @@
 		"vscode": {
 			"settings": {
 				"terminal.integrated.shell.linux": "/bin/bash",
-				"python.defaultInterpreterPath": "/workspaces/venv/bin/python",
+				"python.defaultInterpreterPath": "/home/vscode/venv/bin/python",
 				"python.analysis.autoSearchPaths": true,
 				"python.analysis.typeCheckingMode": "strict",
 				"python.analysis.autoImportCompletions": true,
