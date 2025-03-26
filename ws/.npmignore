@@ -1,0 +1,17 @@
+src
+*.sh
+*.yml
+*.yaml
+jsconfig.json
+*.log
+.babelrc
+test.js
+dev.js
+Dockerfile
+node_modules
+tsconfig.json
+.env
+dev.js
+dev
+test
+deprecate

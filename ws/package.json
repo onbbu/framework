@@ -1,0 +1,22 @@
+{
+  "name": "onbbu-ws",
+  "version": "8.1.0",
+  "description": "Framework Onbbu - Ws",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {},
+  "dependencies": {
+    "onbbu-axon": "^8.1.0",
+    "onbbu-core": "^8.1.0",
+    "onbbu-redis": "^8.1.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "22.7.9",
+    "@types/ws": "^8.5.12"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

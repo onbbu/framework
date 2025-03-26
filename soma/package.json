@@ -1,0 +1,19 @@
+{
+  "name": "onbbu-soma",
+  "version": "8.1.1",
+  "description": "Framework Onbbu - Soma",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {},
+  "dependencies": {
+    "onbbu-axon": "^8.1.0",
+    "onbbu-core": "^8.1.0",
+    "onbbu-cortex": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.9"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

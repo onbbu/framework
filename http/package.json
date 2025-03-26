@@ -1,0 +1,24 @@
+{
+  "name": "onbbu-http",
+  "version": "8.1.0",
+  "description": "Framework Onbbu - HTTP Server",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {},
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/formbody": "^8.0.1",
+    "@fastify/rate-limit": "^10.1.1",
+    "fastify": "^5.0.0",
+    "onbbu-axon": "^8.1.0",
+    "onbbu-core": "^8.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.9",
+    "@types/ws": "^8.5.12"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
