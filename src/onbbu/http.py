@@ -173,7 +173,7 @@ class ServerHttp:
     workers: int
     server: Starlette
 
-    def __init__(self, environment: str, port: Optional[int]):
+    def __init__(self, environment: str, port: Optional[int]) -> None:
         self.host = "0.0.0.0"
         self.port = port or 8000
         self.environment = environment
@@ -192,13 +192,13 @@ class ServerHttp:
 
     @asynccontextmanager
     async def _lifespan(self, app: Starlette):
-        """Gestor de eventos de vida para FastAPI"""
+        """Life events manager"""
         await self.database.init()
         yield
         await self.database.close()
 
     def include_router(self, router: RouterHttp) -> None:
-        """Agrega todas las rutas de un RouterHttp a la aplicación"""
+        """Add all routes from a RouterHttp to the application"""
         self.server.router.routes.extend(router.get_router())
 
 
@@ -211,7 +211,7 @@ server_http: ServerHttp = ServerHttp(
 def runserver(server_http: ServerHttp) -> None:
     logger.log(
         level=LogLevel.INFO,
-        message=f"🚀 Iniciando servidor en {server_http.host}:{server_http.port} ...",
+        message=f"🚀 Starting server on {server_http.host}:{server_http.port} ...",
         extra_data={},
     )
 

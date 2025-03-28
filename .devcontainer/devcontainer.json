@@ -8,7 +8,7 @@
 		"--env-file",
 		".devcontainer/.env"
 	],
-	"postCreateCommand": "echo 'Welcome!! Ya puedes trabajar'",
+	"postCreateCommand": "make install && echo 'Welcome!! Ya puedes trabajar'",
 	"customizations": {
 		"vscode": {
 			"settings": {

@@ -11,20 +11,20 @@ class BaseCommand:
     help: str
 
     def add_arguments(self, parser: ArgumentParser) -> None:
-        """Método para que cada comando defina sus propios argumentos."""
+        """Method for each command to define its own arguments."""
         pass
 
     async def handler(self, args: Namespace) -> None:
-        """Método asíncrono que ejecutará la lógica del comando."""
+        """Asynchronous method that will execute the command logic."""
         pass
 
 
 class MigrateCommand(BaseCommand):
     name: str = "migrate"
-    help: str = "Ejecuta migraciones"
+    help: str = "Run migrations"
 
     async def handler(self, args: Namespace) -> None:
-        print("Ejecutando migraciones...")
+        print("Running migrations...")
 
         await database.init()
 
@@ -41,18 +41,18 @@ class MigrateCommand(BaseCommand):
 
 class CreateModuleCommand(BaseCommand):
     name: str = "create_module"
-    help: str = "Crea un módulo"
+    help: str = "Create a module"
 
     def add_arguments(self, parser: ArgumentParser) -> None:
-        parser.add_argument("-n", "--nombre", help="Nombre del módulo", required=True)
+        parser.add_argument("-n", "--name", help="Module name", required=True)
         parser.add_argument(
-            "-a", "--notify", action="store_true", help="Notificar inmediatamente"
+            "-a", "--notify", action="store_true", help="Notify immediately"
         )
 
     async def handler(self, args: Namespace) -> None:
-        """Ejecuta la lógica asíncrona de creación del módulo."""
+        """Executes the asynchronous logic of module creation."""
         path = os.getcwd()
-        name = args.nombre
+        name = args.name
 
         folders: list[str] = [
             "domain",
@@ -78,7 +78,7 @@ class CreateModuleCommand(BaseCommand):
 
         await asyncio.gather(*(create_folder(folder) for folder in folders))
 
-        print(f"Módulo '{name}' creado en {path}/pkg/{name}")
+        print(f"Module '{name}' created in {path}/pkg/{name}")
 
 
 async def menu_cli(description: str, commands: List[BaseCommand]) -> None:

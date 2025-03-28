@@ -1,14 +1,9 @@
 -include .env
 -include .devcontainer/.env
 
-VENV=../venv
-PYTHON=python
-PIP=$(VENV)/bin/pip
-ENV=${PWD}.env
-
 install:
-	$(PIP) install -r requirements.txt
-	$(PIP) install --upgrade pip
+	pip install --upgrade pip
+	pip install -r requirements.txt
 
 lint:
 	cd src && stubgen -p onbbu --output .
