@@ -1,1 +1,3 @@
 src/onbbu.egg-info
+dist
+**__pycache__
