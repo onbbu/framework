@@ -1,5 +1,4 @@
 from typing import Any, List, Type
-from os import getenv
 from tortoise import Model, Tortoise
 from onbbu.logger import LogLevel, logger
 from aerich import Command  # type: ignore
@@ -9,7 +8,7 @@ class DatabaseManager:
     database_url: str
     command: Command  # type: ignore
 
-    def __init__(self, database_url: str):
+    def __init__(self, database_url: str) -> None:
         self.database_url = database_url
         self.models: List[str] = []
 
@@ -224,8 +223,3 @@ class DatabaseManager:
             message=f"✅ Database connections closed..",
             extra_data={},
         )
-
-
-database: DatabaseManager = DatabaseManager(
-    database_url=getenv("DATABASE_URL", "sqlite://db.sqlite3")
-)

@@ -1,10 +1,7 @@
-from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
 import json
 import logging
-from logging.handlers import RotatingFileHandler
 from typing import Any, Dict, Union
-from os import getenv
 
 from prometheus_client import Counter
 from rich.console import Console
@@ -38,19 +35,12 @@ class JsonFormatter(logging.Formatter):
 
 class Logger:
     console: Console
-    executor: ThreadPoolExecutor
     logger: logging.Logger
 
-    def __init__(self, log_file: str) -> None:
-        self.executor = ThreadPoolExecutor(max_workers=5)
+    def __init__(self) -> None:
         self.logger = logging.getLogger("app_logger")
         self.logger.setLevel(logging.DEBUG)
         self.console = Console()
-
-        log_format = JsonFormatter()
-        file_handler = RotatingFileHandler(log_file, maxBytes=5000000, backupCount=3)
-        file_handler.setFormatter(log_format)
-        self.logger.addHandler(file_handler)
 
     def log(self, level: LogLevel, message: str, extra_data: Dict[str, str]) -> None:
         """Logs a message and prints it to the terminal, updating the log metric."""
@@ -94,4 +84,4 @@ class Logger:
         self.console.print(text)
 
 
-logger: Logger = Logger(log_file=getenv("LOGGER_FILE", "onbbu.log"))
+logger: Logger = Logger()

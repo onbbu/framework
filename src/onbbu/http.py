@@ -3,18 +3,15 @@ from enum import Enum
 import time
 from typing import Any, Awaitable, Callable, Optional, TypeVar
 import multiprocessing
-from contextlib import asynccontextmanager
-from os import getenv
 
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse as JSONResponseStarlette, Response
 from starlette.requests import Request as RequestStarlette
 from starlette.routing import Route
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.types import StatelessLifespan
 
 import uvicorn
-
-from onbbu.database import DatabaseManager, database
 
 from pydantic import ValidationError
 
@@ -165,7 +162,6 @@ class RouterHttp:
 
 
 class ServerHttp:
-    database: DatabaseManager
     host: str
     port: int
     environment: str
@@ -173,7 +169,7 @@ class ServerHttp:
     workers: int
     server: Starlette
 
-    def __init__(self, environment: str, port: Optional[int]) -> None:
+    def __init__(self, environment: str, port: Optional[int], lifespan: StatelessLifespan[Starlette]) -> None:
         self.host = "0.0.0.0"
         self.port = port or 8000
         self.environment = environment
@@ -183,30 +179,14 @@ class ServerHttp:
         self.server = Starlette(
             debug=True,
             routes=[Route("/metrics", metrics_endpoint)],
-            lifespan=self._lifespan,
+            lifespan=lifespan,
         )
 
         self.server.add_middleware(TimingMiddleware)
 
-        self.database = database
-
-    @asynccontextmanager
-    async def _lifespan(self, app: Starlette):
-        """Life events manager"""
-        await self.database.init()
-        yield
-        await self.database.close()
-
     def include_router(self, router: RouterHttp) -> None:
         """Add all routes from a RouterHttp to the application"""
         self.server.router.routes.extend(router.get_router())
-
-
-server_http: ServerHttp = ServerHttp(
-    port=int(getenv("HTTP_PORT", "8000")),
-    environment=getenv("ENVIRONMENT", "development"),
-)
-
 
 def runserver(server_http: ServerHttp) -> None:
     logger.log(

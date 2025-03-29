@@ -2,9 +2,6 @@ import os
 import asyncio
 from argparse import ArgumentParser, HelpFormatter, Namespace
 from typing import List
-from onbbu.database import database
-from onbbu.logger import logger, LogLevel
-
 
 class BaseCommand:
     name: str
@@ -17,27 +14,6 @@ class BaseCommand:
     async def handler(self, args: Namespace) -> None:
         """Asynchronous method that will execute the command logic."""
         pass
-
-
-class MigrateCommand(BaseCommand):
-    name: str = "migrate"
-    help: str = "Run migrations"
-
-    async def handler(self, args: Namespace) -> None:
-        print("Running migrations...")
-
-        await database.init()
-
-        await database.migrate()
-
-        await database.close()
-
-        logger.log(
-            level=LogLevel.INFO,
-            message=f"✅ End command migrate..",
-            extra_data={},
-        )
-
 
 class CreateModuleCommand(BaseCommand):
     name: str = "create_module"
@@ -106,7 +82,6 @@ async def cli() -> None:
 
     commands: List[BaseCommand] = [
         CreateModuleCommand(),
-        MigrateCommand(),
     ]
 
     await menu_cli(description="Onbbu Management script", commands=commands)
