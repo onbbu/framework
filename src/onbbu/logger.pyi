@@ -4,11 +4,11 @@ from prometheus_client import Counter
 from rich.console import Console
 
 class LogLevel(Enum):
-    DEBUG = 'DEBUG'
-    INFO = 'INFO'
-    WARNING = 'WARNING'
-    ERROR = 'ERROR'
-    CRITICAL = 'CRITICAL'
+    DEBUG = "DEBUG"
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
+    CRITICAL = "CRITICAL"
 
 LOG_COUNTER: Counter
 
@@ -19,7 +19,11 @@ class Logger:
     console: Console
     logger: logging.Logger
     def __init__(self) -> None: ...
-    def log(self, level: LogLevel, message: str, extra_data: dict[str, str]) -> None: ...
-    def pretty_print(self, level: LogLevel, message: str, extra_data: dict[str, str]) -> None: ...
+    def log(
+        self, level: LogLevel, message: str, extra_data: dict[str, str]
+    ) -> None: ...
+    def pretty_print(
+        self, level: LogLevel, message: str, extra_data: dict[str, str]
+    ) -> None: ...
 
 logger: Logger

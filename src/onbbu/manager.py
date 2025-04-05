@@ -3,6 +3,7 @@ import asyncio
 from argparse import ArgumentParser, HelpFormatter, Namespace
 from typing import List
 
+
 class BaseCommand:
     name: str
     help: str
@@ -14,6 +15,7 @@ class BaseCommand:
     async def handler(self, args: Namespace) -> None:
         """Asynchronous method that will execute the command logic."""
         pass
+
 
 class CreateModuleCommand(BaseCommand):
     name: str = "create_module"

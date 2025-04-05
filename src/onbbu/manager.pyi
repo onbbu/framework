@@ -1,5 +1,4 @@
 from argparse import ArgumentParser, Namespace
-from onbbu.logger import LogLevel as LogLevel, logger as logger
 
 class BaseCommand:
     name: str

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "onbbu"
-version = "0.2.1"
+version = "0.2.2"
 description = "Onbbu 🛠️🐍 – Hexagonal Architecture for Python"
 readme = "README.md"
 authors = [{ name = "Javier Avila", email = "njavilas2015@gmail.com" }]

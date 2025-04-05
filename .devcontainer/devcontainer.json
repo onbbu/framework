@@ -14,6 +14,7 @@
 			"settings": {
 				"terminal.integrated.shell.linux": "/bin/bash",
 				"python.defaultInterpreterPath": "/home/vscode/venv/bin/python",
+				"python.analysis.nodeExecutable": "/usr/bin/node",
 				"python.analysis.autoSearchPaths": true,
 				"python.analysis.typeCheckingMode": "strict",
 				"python.analysis.autoImportCompletions": true,

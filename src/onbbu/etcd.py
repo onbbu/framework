@@ -1,6 +1,7 @@
 import os
 from etcd3 import client, Etcd3Client  # type: ignore
 
+
 def get_etcd_client() -> Etcd3Client:
     host = os.getenv("ETCD_HOST", "localhost")
     port = int(os.getenv("ETCD_PORT", 2379))
@@ -21,7 +22,8 @@ def get_etcd_client() -> Etcd3Client:
         timeout=timeout,
         user=user,
         password=password,
-        grpc_options=grpc_options
+        grpc_options=grpc_options,
     )
+
 
 etcd_client: Etcd3Client = get_etcd_client()

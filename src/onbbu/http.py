@@ -169,7 +169,12 @@ class ServerHttp:
     workers: int
     server: Starlette
 
-    def __init__(self, environment: str, port: Optional[int], lifespan: StatelessLifespan[Starlette]) -> None:
+    def __init__(
+        self,
+        environment: str,
+        port: Optional[int],
+        lifespan: StatelessLifespan[Starlette],
+    ) -> None:
         self.host = "0.0.0.0"
         self.port = port or 8000
         self.environment = environment
@@ -187,6 +192,7 @@ class ServerHttp:
     def include_router(self, router: RouterHttp) -> None:
         """Add all routes from a RouterHttp to the application"""
         self.server.router.routes.extend(router.get_router())
+
 
 def runserver(server_http: ServerHttp) -> None:
     logger.log(
